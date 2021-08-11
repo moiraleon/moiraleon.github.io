@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+    <style>
+        * {
+          box-sizing: border-box;
+        }
+        
+        .column {
+          float: left;
+          padding: 10px;
+          height: 100vh; 
+        }
+        
+        .left {
+          width: 60%;
+        }
+        
+        .right {
+          width: 40%;
+        }
+        
+        .row:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+        </style>
+</head>
+<body>
+    <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/skills">Skills</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li style="float:right"><a href="/contact">Contact</a></li>
+      </ul>
+
+    <div class="row">
+      <div class="column left" style="background-color:rgba(255, 255, 255, 0.068)">
+        <h1>Moira Leon</h1>
+        <p>I am a software engineer passionate about personal development, learning new languages, and correcting typos.</p> 
+        <br>
+        <h2>General Information</h2>
+        <p>Graduated:  DevMountain</p> 
+        <p>Graduation: Date Oct 8, 2021</p>
+        <p>Specialty: Java</p>
+        <p>Additional Relevant Experience:  Self taught Python and Udemy courses on Python and Computer Science</p>
+        <p>Relevant Schooling: Purdue University-Professional Studies, Berklee School of Music-Music Production</p>
+        <p>Languages: Spanish, Mandarin, Italian, Romanian</p>
+        <p>Stack Languages: Javascript, CSS, HTML, Java, Python, SQL</p>
+        <br>
+        <h3>About Me</h3>
+        <p>Hello! I was born and raised in sunny Arizona after which I spent years traveling and learning new languages. Upon recognizing my aptitude for learning languages could help me
+            grow and develop technical skills I began to pursure software development. I am passionate about learning new things and have a constant level of enthusiasm for growth. 
+            I admire those around me and look for ways to learn from everyone I meet. I firmly believe that if you are looking to learn you will continue to discover
+            the world around you and that possibilities for growth are endless. I find the constant development and creative aspect of the tech field to be an exciting environment to foster new growth and skills.
+        </p>
+
+    <br>
+    <p>Lovely to meet you!</p>
+
+<h2 id="signature">Moira Leon</h2>
+
+      </div>
+      <div class="column right" style="background-color:whitesmoke;">
+        
+        <img id="profile" src="/public/me_img.jpeg" alt="profile image">
+      </div>
+    </div>
+    
+</body>
+</html>

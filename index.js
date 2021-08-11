@@ -5,10 +5,38 @@ app.use(express.static('public'))
 
 app.use('/public', express.static(path.join(__dirname, './public')))
 
+
 app.get('/',(req,res)=>{
     res.sendFile(path.join(__dirname,'/index.html'))
 })
 
-const port = process.env.PORT||6000
+app.get('/home',(req,res)=>{
+    res.sendFile(path.join(__dirname,'/index.html'))
+})
+
+app.get('/about', (req, res) => {
+    res.sendFile(path.join(__dirname, '/alternative_html _files/about.html'))
+  })
+
+app.get('/skills', (req, res) => {
+    res.sendFile(path.join(__dirname, '/alternative_html _files/skills.html'))
+  })
+
+app.get('/projects', (req, res) => {
+    res.sendFile(path.join(__dirname, '/alternative_html _files/projects.html'))
+  })
+
+  app.get('/contact', (req, res) => {
+    res.sendFile(path.join(__dirname, '/alternative_html _files/contact.html'))
+  })
+
+app.get('/styles.css', (req, res) => {
+    res.sendFile(path.join(__dirname, '/styles.css'))
+  })
+
+
+
+  
+const port = process.env.PORT||5200
 
 app.listen(port,()=>{console.log(`listening on port ${port}`)})

@@ -1,5 +1,5 @@
 #name{
-  font: 400 100px/1.3 Cedarville Cursive ;
+  font: 400 100px/1.3 'Arizonia', Helvetica, sans-serif;
   text-align: center;
 }
 ul {
@@ -67,4 +67,53 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+#profile{
+  width: 90%;
+  border-radius: 50%;
+}
+
+#signature{
+  font: 200 80px/1.3 'Snell Roundhand', cursive
+}
+
+*{
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.column {
+  float: left;
+  width: 33.33%;
+}
+
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.skills{
+  height: 400px;
+  filter: grayscale(100%);
+}
+.skills_headers{
+  text-align: center;
+}
+
+.skills_description{
+  text-align:justify;
+  border: 2px solid black;
 }
