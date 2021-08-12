@@ -22,7 +22,7 @@
     <h1 style="text-align: center;" >Contact Me</h1>
 
     <div class="contact-container">
-        <form action="action_page.php">
+        <form id="contact-form" action="/contact-form" method="POST">
       
           <label for="fname">First Name</label>
           <input type="text" id="fname" name="firstname" placeholder="Your name..">
@@ -48,7 +48,37 @@
       
         </form>
       </div>
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+      <script>
+        const form = document.getElementById('contact-form')
+        form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      let fnameInput = document.getElementById('fname');
+      let lnameInput = document.getElementById('lname');
+      // let preferredInput = document.getElementById('mail');
+      // let animalInput = document.querySelector('input[name="group1"]:checked');
+      let mailInput = document.getElementById('email');
+      let phoneInput = document.getElementById('tel');
+      let subjectInput =document.getElementById('subject')
     
+      let body = { 
+        fname: fnameInput.value,
+        lname: lnameInput.value,
+        mail: mailInput.value,
+        phone: phoneInput.value,
+        subject: subjectInput.value,
+       }
+      console.log(body)
+      axios.post('/contact-form', body)
+      .then
+    });
+      </script>
+
+
+
+
+
     <!-- <a href="mailto:moira.leon2@gmail.com">Send email</a> -->
 
 
