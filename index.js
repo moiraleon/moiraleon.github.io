@@ -39,8 +39,8 @@ app.get('/styles.css', (req, res) => {
     let{fname,lname,mail,phone,subject} =req.body;
     console.log(req.body)
     res.status(200).send(req.body)
-})
 
+})
   
 const port = process.env.PORT||5200
 

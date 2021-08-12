@@ -30,8 +30,8 @@
           <label for="lname">Last Name</label>
           <input type="text" id="lname" name="lastname" placeholder="Your last name..">
       
-          <label for="preferred">Preffered Contact Method</label>
-          <select id="preffered" name="preferred">
+          <label for="preferred">Prefered Contact Method</label>
+          <select id="prefered" name="preferred">
             <option value="email">Email</option>
             <option value="phone">Phone</option>
           </select>
@@ -56,8 +56,7 @@
       event.preventDefault();
       let fnameInput = document.getElementById('fname');
       let lnameInput = document.getElementById('lname');
-      // let preferredInput = document.getElementById('mail');
-      // let animalInput = document.querySelector('input[name="group1"]:checked');
+      // let preferredInput = document.getElementById('preferred').selectedIndex();
       let mailInput = document.getElementById('email');
       let phoneInput = document.getElementById('tel');
       let subjectInput =document.getElementById('subject')
@@ -65,13 +64,14 @@
       let body = { 
         fname: fnameInput.value,
         lname: lnameInput.value,
+        // preferred: preferredInput.value,
         mail: mailInput.value,
         phone: phoneInput.value,
         subject: subjectInput.value,
        }
       console.log(body)
       axios.post('/contact-form', body)
-      .then
+      .then(form.reset());
     });
       </script>
 
