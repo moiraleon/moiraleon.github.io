@@ -4,6 +4,9 @@ const app =express();
 app.use(express.json());
 app.use(express.static('public'))
 const nodemailer = require("nodemailer");
+const multiparty = require("multiparty");
+require("dotenv").config();
+// var smtpTransport = require('nodemailer-smtp-transport');
 
 app.use('/public', express.static(path.join(__dirname, './public')))
 
@@ -36,12 +39,12 @@ app.get('/styles.css', (req, res) => {
     res.sendFile(path.join(__dirname, '/styles.css'))
   })
 
-  app.post("/contact-form", (req,res)=>{
-    let{fname,lname,mail,phone,subject} =req.body;
-    console.log(req.body)
-    res.status(200).send(req.body)
+//   app.post("/contact-form", (req,res)=>{
+//     let{fname,lname,mail,phone,subject} =req.body;
+//     console.log(req.body)
+//     res.status(200).send(req.body)
 
-})
+// })
 //SETTING UP NODEMAILER
 
 // async function main() {
@@ -82,7 +85,7 @@ app.get('/styles.css', (req, res) => {
 //   service:'gmail',
 //   auth:{
 //     user: 'moirasfeng@gmail.com',
-//     pass: 'SoftEngPass!'
+//     pass: '...'
 //   }
 // });
 //  var mailOptions ={
@@ -100,36 +103,87 @@ app.get('/styles.css', (req, res) => {
 //  })
 //updating nodemailer
 
-app.post("/contact-form",function(req,res){
+// app.post("/contact-form",function(req,res){
 
-var transporter = nodemailer.createTransport({
-  service:'gmail',
-  secure:true,
-  auth:{
+// var transporter = nodemailer.createTransport({
+//   service:'gmail',
+//   secure:true,
+//   auth:{
+//     user: 'moirasfeng@gmail.com',
+//     pass: '....'
+//   }
+  
+// });
+//  var textBody = `From: ${req.body.firstname} ${req.body.lastname} Message: ${req.body.subject}`
+//  var email = `${req.body.email}`
+//  var htmlBody = `<h2>Mail From Contact Form</h2> <p>from: ${req.body.firstname} ${req.body.lastname} </p> <p>${req.body.email}</p>  <p>${req.body.tel}</p> <p>${req.body.subject}</p>`
+//  var mailOptions ={
+//    from: email,
+//    to: 'moirasfeng@gmail.com',
+//    subject: 'Sending Email using Node.js',
+//    text: textBody,
+//    html: htmlBody
+//  };
+//  transporter.sendMail(mailOptions, function(error,info){
+//    if (error){
+//      console.log(error);
+//    }else{
+//      console.log('Email sent: '+ info.response);
+//    };
+//  });
+
+// })
+
+app.route("/contact-form").get(function (req, res) {
+  res.sendFile(process.cwd() + "/alternative_html _files/contact.html");
+});
+
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com", 
+  port: 587,
+  auth: {
+    // user: process.env.EMAIL,
+    // pass: process.env.PASS,
     user: 'moirasfeng@gmail.com',
     pass: 'SoftEngPass!'
-  }
-  
+  },
 });
- var textBody = `From: ${req.body.firstname} ${req.body.lastname} Message: ${req.body.subject}`
- var email = `${req.body.email}`
- var htmlBody = `<h2>Mail From Contact Form</h2> <p>from: ${req.body.firstname} ${req.body.lastname} </p> <p>${req.body.email}</p>  <p>${req.body.tel}</p> <p>${req.body.subject}</p>`
- var mailOptions ={
-   from: email,
-   to: 'moirasfeng@gmail.com',
-   subject: 'Sending Email using Node.js',
-   text: textBody,
-   html: htmlBody
- };
- transporter.sendMail(mailOptions, function(error,info){
-   if (error){
-     console.log(error);
-   }else{
-     console.log('Email sent: '+ info.response);
-   };
- });
 
-})
+transporter.verify(function (error, success) {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log("Server is ready to take our messages");
+  }
+});
+
+app.post("/contact-form", (req, res) => {
+  let form = new multiparty.Form();
+  let data = {};
+  form.parse(req, function (err, fields) {
+    console.log(fields);
+    Object.keys(fields).forEach(function (property) {
+      data[property] = fields[property].toString();
+    });
+    const mail = {
+      from: data.firstname,
+      to: 'moirasfeng@gmail.com',
+      // to: process.env.EMAIL,
+      subject: 'Message from Software Engineering Site',
+      text: `${data.firstname} ${data.lastname} <${data.email}> \n${data.subject}`,
+    };
+    
+    transporter.sendMail(mail, (err, data) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send("Something went wrong.");
+      } else {
+        res.status(200).send("Email successfully sent to recipient!");
+      }
+    });
+  });
+});
+
 
 
 
