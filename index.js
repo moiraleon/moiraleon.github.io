@@ -78,18 +78,48 @@ app.get('/styles.css', (req, res) => {
 
 // main().catch(console.error);  
 
+// var transporter = nodemailer.createTransport({
+//   service:'gmail',
+//   auth:{
+//     user: 'moirasfeng@gmail.com',
+//     pass: 'SoftEngPass!'
+//   }
+// });
+//  var mailOptions ={
+//    from: 'moirasfeng@gmail.com',
+//    to: 'moirasfeng@gmail.com',
+//    subject: 'Sending Email using Node.js',
+//    text: 'test email'
+//  };
+//  transporter.sendMail(mailOptions, function(error,info){
+//    if (error){
+//      console.log(error);
+//    }else{
+//      console.log('Email sent: '+ info.response);
+//    };
+//  })
+//updating nodemailer
+
+app.post("/contact-form",function(req,res){
+
 var transporter = nodemailer.createTransport({
   service:'gmail',
+  secure:true,
   auth:{
     user: 'moirasfeng@gmail.com',
     pass: 'SoftEngPass!'
   }
+  
 });
+ var textBody = `From: ${req.body.firstname} ${req.body.lastname} Message: ${req.body.subject}`
+ var email = `${req.body.email}`
+ var htmlBody = `<h2>Mail From Contact Form</h2> <p>from: ${req.body.firstname} ${req.body.lastname} </p> <p>${req.body.email}</p>  <p>${req.body.tel}</p> <p>${req.body.subject}</p>`
  var mailOptions ={
-   from: 'moirasfeng@gmail.com',
+   from: email,
    to: 'moirasfeng@gmail.com',
    subject: 'Sending Email using Node.js',
-   text: 'test email'
+   text: textBody,
+   html: htmlBody
  };
  transporter.sendMail(mailOptions, function(error,info){
    if (error){
@@ -97,10 +127,9 @@ var transporter = nodemailer.createTransport({
    }else{
      console.log('Email sent: '+ info.response);
    };
- })
+ });
 
-
-
+})
 
 
 
