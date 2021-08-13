@@ -91,8 +91,14 @@
     body: mail, 
 
   }).then((response) => {
+    alert ('Message sent successfully')
     return response.json();
-  });(form.reset())
+  })
+  .catch(err =>{
+    alert ('Message form error, please try again.')
+    console.log(err)
+  })
+  (form.reset())
 };
 
   </script>
